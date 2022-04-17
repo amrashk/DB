@@ -1,7 +1,3 @@
-# DB
-
-
-
 Create table Genre(
 	Genre_ID char(6),
 	Name varchar(10)
@@ -254,7 +250,7 @@ values ('O00001', 'S00001'),
 ('O00008', 'S00005')
 
 
-
+go
 /* View 1 */
 CREATE VIEW ProductionTeams as
 select p.Prod_ID, d.Role, p.Name, m.Name as MovieName from Production p, Movies m, Participated d
@@ -264,9 +260,8 @@ select * from ProductionTeams
 
 
 create view TakenSeats as
-select m.Name as MovieName, t.Start_Time, Count(os.Seat_ID) from Movies m, Orders o, OrderSeats os, Timetable t
+select m.Name as MovieName, t.Start_Time, os.Seat_ID from Movies m, Orders o, OrderSeats os, Timetable t
 where t.Show_ID = o.Show_ID and o.Order_ID = os.Order_ID and m.Movie_ID = t.Movie_ID
-group by t.Show_ID
 
 select * from TakenSeats
 
@@ -276,3 +271,37 @@ Select m.Name, t.Day, t.Start_Time, t.Hall_ID
 from Movies m, Timetable t
 where m.Movie_ID=t.Movie_ID 
 select * from Tsagiinhuvaari
+
+/* Group By 1*/
+SELECT pr.Name, COUNT(p.Movie_ID) AS Involved_In FROM Participated p
+INNER JOIN Movies m ON p.Movie_ID = m.Movie_ID
+INNER JOIN Production pr ON pr.Prod_ID = p.Prod_ID
+GROUP BY pr.Name
+
+/* Group By 2 */
+SELECT o.Customer_ID, COUNT(o.Order_ID) AS TotalWatched FROM Orders o
+INNER JOIN Customers c ON c.Customer_ID = o.Customer_ID
+GROUP BY o.Customer_ID
+
+create proc sul_suudal as 
+select count(Seat.Seat_ID) as Seats, Hall.Hall_ID from Seat, Hall
+where Hall.Hall_ID = Seat.Hall_ID
+group by Hall.Hall_ID
+
+execute sul_suudal
+
+
+SELECT pr.Name, p.Movie_ID, pr.Link from Participated p
+INNER JOIN Production pr ON pr.Prod_ID = p.Prod_ID
+
+
+SELECT o.Customer_ID, c.Name, c.Mail, o.Order_ID FROM Orders o
+INNER JOIN Customers c ON c.Customer_ID = o.Customer_ID
+
+SELECT o.Customer_ID, c.Name, c.Mail, o.Order_ID, t.Day FROM Orders o
+INNER JOIN Customers c ON c.Customer_ID = o.Customer_ID
+INNER JOIN Timetable t on t.Show_ID = o.Show_ID
+
+SELECT pr.Name, p.Movie_ID, pr.Link, m.Name FROM Participated p
+INNER JOIN Movies m ON p.Movie_ID = m.Movie_ID
+INNER JOIN Production pr ON pr.Prod_ID = p.Prod_ID
