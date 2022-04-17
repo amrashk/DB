@@ -1,10 +1,12 @@
 # DB
 
 
+
 Create table Genre(
 	Genre_ID char(6),
 	Name varchar(10)
 	);
+
 Create table Customers(
 	Customer_ID char(6) PRIMARY KEY,
 	Name varchar(20),
@@ -18,7 +20,7 @@ CREATE TABLE Production (
     primary key (Prod_ID)
 );
 Create table Price (
-	Hall_Type char(6) PRIMARY KEY,
+	Hall_Type char(6),
 	Cost int,
 	Seat_Type char(6)
 );
@@ -125,7 +127,7 @@ values
 	'2022-03-04', '2022-04-01', 1, 'https://cdn.mos.cms.futurecdn.net/p7LYq5FN4SAHk7sYp6zZog.jpg', 'https://www.youtube.com/watch?v=mqqft2x_Aa4', 175),
 
 	('M00005', 'Uncharted', 6, 'Street-smart Nathan Drake, is recruited by seasoned treasure hunter, Victor "Sully" Sullivan, to recover a fortune amassed by Ferdinand Magellan, and lost 500 years ago by the House of Moncada.', 
-	'2022-02-18', '2022-04-01', 1, 'https://scale.coolshop-cdn.com/product-media.coolshop-cdn.com/23A95K/4c8884c-bb9d4fab9a865d119444a642.jpg/f/uncharted.jpg', 'https://www.youtube.com/watch?v=eHp3MbsCbMg', 120),
+	'2022-02-18', '2022-04-01', 1, 'https://scale.coolshop-cdn.com/product-media.coolshop-cdn.com', 'https://www.youtube.com/watch?v=eHp3MbsCbMg', 120),
 
 	('M00006', 'For You', 0, 'Улс орон даяар 3-н хоног амрахаар болно. Санамсаргүй байдлаар дүргүй залуутайгаа хамт түгжигдсэн маркетингийн менежер бүсгүй гарах арга хайх боловч ээлж солигдтол өөр арга байхгүй гэдгийг хамгаалагч Маргад ойлгуулна. Их дэлгүүрт түгжигдсэн залуус эхэндээ зөрчилдөх ба яваандаа цагийг хөгжилтэй өнгөрөөх гэж Их дэлгүүрээр хэсэж энэ хугацаандаа бие биедээ дасаж дурлана. ',
 	'2022-02-09', '2022-01-07', 1, 'https://kinosan.mn/uploads/cache/6/d/8a8e172930ced9c823ca274c9c6527972fb5d535_900x0.jpg', 'https://www.youtube.com/watch?v=HMAWnsNVsFs', 85),
@@ -186,6 +188,41 @@ Values  ('P00001', 'Will Wernick', 'https://www.imdb.com/name/nm1820881/'),
 		('P00013', 'Г.Алтангэрэл', 'https://www.urgoo.mn/movie/HO00001029/%D0%BD%D0%B0%D1%80%D0%BD%D1%8B-%D1%81%D0%B0%D0%B4%D0%B0%D0%BD'),
 		('P00014', 'Domee Shi', 'https://www.imdb.com/name/nm7626019/');
 
+
+
+insert into Participated(Role, Prod_ID, Movie_ID)
+values('Director', 'P00001', 'M00001'),
+('Actress', 'P00002', 'M00002'),
+('Actress', 'P00003', 'M00003'),
+('Actor', 'P00004', 'M00004'),
+('Producer', 'P00005', 'M00005'),
+('Actor', 'P00006', 'M00006'),
+('Director', 'P00007', 'M00007')
+
+insert into Payment(Order_ID, Bank, Dans)
+values('O00001', 'Khanbank', 51515250),
+('O00002', 'Golomtbank', 11515250),
+('O00003', 'Xacbank', 21515250),
+('O00004', 'Khanbank', 41515250),
+('O00005', 'Xacbank', 31515250),
+('O00006', 'Golomtbank', 81515250),
+('O00006', 'TDB', 87615250),
+('O00007', 'TDB', 87615250),
+('O00008', 'Khanbank', 52515250)
+
+insert into Seat(Seat_ID, Seat_Type, Hall_ID)
+values('S00001', 'Stn', 'H00001'),
+('S00002', 'VIP', 'H00003'),
+('S00003', 'Stn', 'H00001'),
+('S00004', 'VIP', 'H00003'),
+('S00005', 'VIP', 'H00006'),
+('S00006', 'Stn', 'H00005'),
+('S00007', 'VIP', 'H00006'),
+('S00008', 'Stn', 'H00004'),
+('S00009', 'VIP', 'H00001'),
+('S00010', 'Stn', 'H00002'),
+('S00011', 'Stn', 'H00002'),
+('S00012', 'Stn', 'H00001')
 
 insert into OrderSeats(Order_ID, Seat_ID)
 values ('O00001', 'S00001'),
